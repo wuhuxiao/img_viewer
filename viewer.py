@@ -6,7 +6,10 @@ from PIL import Image
 st.set_page_config(page_title="Layer 图像对比", layout="wide")
 
 base_dir = './imgs'
-layers = sorted([d for d in os.listdir(base_dir) if d.startswith('layer_')])
+layers = sorted(
+    [d for d in os.listdir(base_dir) if d.startswith("layer_")],
+    key=lambda x: int(x.split("_")[1])  # 提取数字部分进行排序
+)
 image_names = [
     "no rope and baseline_Mean.png",
     "re rope and baseline_Mean.png",
