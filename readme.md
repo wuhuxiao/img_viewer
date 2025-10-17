@@ -12,7 +12,7 @@ model_output = self.model(
     inputs_embeds=inputs_embeds,
 )
 ```           
-then, we execute the following code in console to dumped the produced kv caches .
+then, we execute the following code in console to dump the produced kv caches .
 ```python
 num_blks = attn_metadata['model.layers.0.self_attn.attn'].seq_lens[0].item()//128 + 1
 num_blks
@@ -31,7 +31,7 @@ just run the analyse.py to process the kv cache tensors
 as we have visualization pngs for each layer, normally we would compare the pngs at different level, \
 such as in each layer, the comparison of different method, \
 or for the exact method, the changes over different layer. \
-we just using streamlit for visualization and sharing as service.
+we just use streamlit for visualization and sharing as service.
 ```bash
 streamlit run .\viewer.py --server.address 127.0.0.1 --server.port 8501
 streamlit run .\viewer_per_compare.py --server.address 127.0.0.1 --server.port 8502
