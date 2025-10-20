@@ -11,7 +11,7 @@ layers = sorted(
     key=lambda x: int(x.split("_")[1])  # 提取数字部分进行排序
 )
 
-dir_path = base_dir + "layer_0"
+dir_path = base_dir + "/layer_0"
 image_names = [f for f in os.listdir(dir_path) if f.endswith(".png")]
 
 print(image_names)
