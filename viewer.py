@@ -10,14 +10,11 @@ layers = sorted(
     [d for d in os.listdir(base_dir) if d.startswith("layer_")],
     key=lambda x: int(x.split("_")[1])  # 提取数字部分进行排序
 )
-image_names = [
-    "no rope and baseline_Mean.png",
-    "re rope and baseline_Mean.png",
-    "re rope and no rope_Mean.png",
-    "no rope and baseline_Std.png",
-    "re rope and baseline_Std.png",
-    "re rope and no rope_Std.png"
-]
+
+dir_path = base_dir + "layer_0"
+image_names = [f for f in os.listdir(dir_path) if f.endswith(".png")]
+
+print(image_names)
 
 # ========== 状态保持（避免每次刷新重置） ==========
 if "layer_idx" not in st.session_state:

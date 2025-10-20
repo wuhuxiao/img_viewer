@@ -11,14 +11,10 @@ layers = sorted(
     key=lambda x: int(x.split("_")[1])
 )
 
-image_names = [
-    "no rope and baseline_Mean.png",
-    "re rope and baseline_Mean.png",
-    "re rope and no rope_Mean.png",
-    "no rope and baseline_Std.png",
-    "re rope and baseline_Std.png",
-    "re rope and no rope_Std.png"
-]
+dir_path = base_dir + "layer_0"
+image_names = [f for f in os.listdir(dir_path) if f.endswith(".png")]
+
+print(image_names)
 
 # ========== 选择图像类型 ==========
 st.title("📊 不同 Layer 的同图像对比查看")
