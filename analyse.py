@@ -11,16 +11,16 @@ def get_kv_tensor_from_dirs(layer_id, dirs):
 
 def draw_tensors(tensor, title, prop):
     assert len(tensor.shape) == 2
-    with plt.figure(figsize=(8, 6)) as fig:
-        plt.imshow(tensor.float().cpu().numpy(), cmap='coolwarm', aspect='auto')
-        plt.colorbar(label=f' Absolute Error')
-        plt.title(f'{title} Difference Heatmap: {prop}')
-        plt.xlabel('num_tokens')  # 横轴标签
-        plt.ylabel('num_blks')  # 纵轴标签
-        save_dir = f"imgs/layer_{layer_id}/"
-        os.makedirs(save_dir, exist_ok=True)  # 若不存在则自动创建
-        fig.savefig(os.path.join(save_dir, f'{title}_{prop}.png'), dpi=300, bbox_inches='tight')  # 高分辨率保存
-        # plt.show()
+    plt.figure(figsize=(8, 6))
+    plt.imshow(tensor.float().cpu().numpy(), cmap='coolwarm', aspect='auto')
+    plt.colorbar(label=f' Absolute Error')
+    plt.title(f'{title} Difference Heatmap: {prop}')
+    plt.xlabel('num_tokens')  # 横轴标签
+    plt.ylabel('num_blks')  # 纵轴标签
+    save_dir = f"imgs/layer_{layer_id}/"
+    os.makedirs(save_dir, exist_ok=True)  # 若不存在则自动创建
+    plt.savefig(os.path.join(save_dir, f'{title}_{prop}.png'), dpi=300, bbox_inches='tight')  # 高分辨率保存
+    # plt.show()
 
 def describe_tensors_per_blk(tensor, title):
     draw_tensors(tensor.reshape(num_blks,num_tokens, -1).mean(-1), title, "Mean")
