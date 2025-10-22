@@ -3,6 +3,9 @@ import torch
 import matplotlib.pyplot as plt
 import multiprocessing as mp
 
+TENSOR_DIR = "/home/whx/vllm-workspace/dumped_tensors"
+IMG_DIR = "/home/whx/vllm-workspace/dumped_tensors/img_viewer/imgs"
+
 
 def get_kv_tensor_from_dirs(layer_id, dirs):
     """读取多个目录下相同layer的kv张量"""
@@ -21,7 +24,7 @@ def draw_tensors(tensor, layer_id, title, prop):
     plt.xlabel('num_tokens')
     plt.ylabel('num_blks')
 
-    save_dir = f"imgs/layer_{layer_id}/"
+    save_dir = f"{IMG_DIR}/layer_{layer_id}/"
     os.makedirs(save_dir, exist_ok=True)
     plt.savefig(os.path.join(save_dir, f'{title}_{prop}.png'), dpi=300, bbox_inches='tight')
     plt.close()  # ✅ 防止内存泄漏
@@ -40,7 +43,7 @@ def describe_tensors_per_blk(tensor, layer_id, title, num_blks, num_tokens):
 def process_layer(layer_id):
     """单层的处理逻辑（可并行）"""
     try:
-        dirs = ["base_line/", "re_rope/", "blend/"]
+        dirs = [f"{TENSOR_DIR}/base_line/", f"{TENSOR_DIR}/re_rope/", f"{TENSOR_DIR}/blend/"]
         tensors = list(get_kv_tensor_from_dirs(layer_id, dirs))
         base_line_kv, re_rope_kv, blend_kv = tensors
 
